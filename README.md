@@ -1,6 +1,12 @@
+<div align="center">
+
+![Raidens](https://sesiraidens.github.io/portifolio/assets/logo_color-aNRVU26Y.png)
+
 # Raidens Calendar
 
 Calendario de eventos desenvolvido para o SESI Raidens, com interface moderna, responsiva e persistencia de dados local.
+
+</div>
 
 ---
 
@@ -44,7 +50,7 @@ O formulario de criacao de eventos permite definir o nome, data e horario do com
 
 ## Estrutura do Projeto
 
-```
+`
 RaidensCalendar/
 ├── index.html          # Arquivo principal com HTML e pre-loader
 ├── css/
@@ -58,7 +64,7 @@ RaidensCalendar/
     ├── PreLoader.png
     ├── TelaDoSite.png
     └── NovoEvento.png
-```
+`
 
 ---
 
@@ -73,7 +79,7 @@ RaidensCalendar/
 
 ## Como Usar
 
-1. Abra o arquivo `index.html` em qualquer navegador moderno
+1. Abra o arquivo index.html em qualquer navegador moderno
 2. Aguarde o pre-loader finalizar
 3. Navegue entre os meses usando as setas ou o botao "Hoje"
 4. Clique em um dia ou no botao "+ Novo evento" para adicionar um evento
@@ -98,6 +104,8 @@ RaidensCalendar/
 
 ---
 
-## Autor
+<div align="center">
 
-**SESI Raidens** - Desenvolvimento web
+**Equipe RAIDENS - SESI Aluminio 192**
+
+</div>
