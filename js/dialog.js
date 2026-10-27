@@ -145,3 +145,4 @@ dialog.addEventListener("click", e => {
 
   if (outside) closeDialog();
 });
+
