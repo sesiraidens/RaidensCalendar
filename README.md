@@ -1,111 +1,100 @@
 <div align="center">
 
-<img src="https://sesiraidens.github.io/portifolio/assets/logo_color-aNRVU26Y.png" width="80">
+<img src="https://sesiraidens.github.io/portifolio/assets/logo_color-aNRVU26Y.png" alt="Logo RAIDENS" width="140">
 
 # Raidens Calendar
 
-Calendario de eventos desenvolvido para o SESI Raidens, com interface moderna, responsiva e persistencia de dados local.
+**Calendário de eventos da equipe RAIDENS: leve, responsivo e sem dependências**
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Sem dependências](https://img.shields.io/badge/depend%C3%AAncias-nenhuma-2EA043?style=flat-square)
+
+[Sobre](#sobre) · [Telas](#telas) · [Funcionalidades](#funcionalidades) · [Como usar](#como-usar) · [Estrutura](#estrutura)
 
 </div>
 
 ---
 
-## Pre-Loader
+## Sobre
 
-Ao carregar a pagina, um pre-loader exibe a logo do Raidens com animacao de pulse e uma barra de progresso estilizada, garantindo uma experiencia visual fluida antes do conteudo principal aparecer.
+O **Raidens Calendar** organiza treinos, reuniões e datas de competição da equipe em uma visão mensal simples. Ele roda inteiro no navegador, em HTML, CSS e JavaScript puros: não precisa de servidor, build nem instalação. Os eventos ficam salvos no `localStorage`, então continuam lá quando você fecha e abre a página.
 
-![Pre-Loader](assets/PreLoader.png)
+## Telas
 
----
-
-## Tela Principal
-
-O calendario exibe a visualizacao mensal completa com navegacao entre meses, indicador do dia atual em destaque e separacao clara dos dias da semana. O botao "Novo evento" permite adicionar compromissos de forma rapida e intuitiva.
-
-![Tela Principal](assets/TelaDoSite.png)
-
----
-
-## Dialog de Novo Evento
-
-O formulario de criacao de eventos permite definir o nome, data e horario do compromisso. A interface inclui opcoes para salvar, cancelar ou excluir eventos ja existentes, com validacao dos campos obrigatorios.
-
-![Novo Evento](assets/NovoEvento.png)
-
----
+<table>
+  <tr>
+    <td align="center" width="33%"><b>Pre-loader</b></td>
+    <td align="center" width="33%"><b>Visão mensal</b></td>
+    <td align="center" width="33%"><b>Novo evento</b></td>
+  </tr>
+  <tr>
+    <td><img src="assets/PreLoader.png" alt="Pre-loader com a logo RAIDENS"></td>
+    <td><img src="assets/TelaDoSite.png" alt="Calendário na visão mensal"></td>
+    <td><img src="assets/NovoEvento.png" alt="Formulário de novo evento"></td>
+  </tr>
+  <tr>
+    <td>Logo com animação de pulso e barra de progresso enquanto a página carrega.</td>
+    <td>Mês completo, dia atual em destaque e navegação entre meses.</td>
+    <td>Nome, data e horário, com validação dos campos e opção de excluir.</td>
+  </tr>
+</table>
 
 ## Funcionalidades
 
-- **Calendario mensal** com visualizacao completa de 42 dias (6 semanas)
-- **Navegacao entre meses** com setas, botao "Hoje" ou atalhos de teclado (setas esquerda/direita)
-- **Criacao e edicao de eventos** com titulo, data e horario
-- **Exclusao de eventos** com confirmacao
-- **Persistencia local** - todos os dados sao salvos automaticamente no localStorage
-- **Pre-loader** com animacao ao carregar a pagina
-- **Indicador de salvamento** visual quando um evento e registrado
-- **Design responsivo** adaptado para desktop e dispositivos moveis
-- **Animacoes suaves** em transicoes de meses, abertura de dialog e interacoes
+- **Visão mensal** com 42 dias (6 semanas), sem cortes entre meses
+- **Navegação** pelas setas na tela, pelo botão **Hoje** ou pelo teclado
+- **Criar, editar e excluir eventos** com título, data e horário
+- **Salvamento automático** no `localStorage`, com indicador visual
+- **Layout responsivo** para computador e celular
+- **Animações suaves** na troca de mês, na abertura do diálogo e nas interações
 
----
+### Atalhos de teclado
 
-## Estrutura do Projeto
+| Tecla | Ação |
+|---|---|
+| <kbd>←</kbd> | Mês anterior |
+| <kbd>→</kbd> | Próximo mês |
 
-`
+## Como usar
+
+```bash
+git clone https://github.com/sesiraidens/RaidensCalendar.git
+```
+
+1. Abra o `index.html` em um navegador moderno.
+2. Clique em um dia ou em **+ Novo evento**.
+3. Preencha os campos e clique em **Salvar**.
+
+Os eventos ficam no navegador em que foram criados. Para usá-los em outro computador, cadastre-os de novo lá.
+
+### Compatibilidade
+
+Chrome 90+, Firefox 88+, Edge 90+ e Safari 14+.
+
+## Estrutura
+
+```text
 RaidensCalendar/
-├── index.html          # Arquivo principal com HTML e pre-loader
-├── css/
-│   └── styles.css      # Estilos completos da aplicacao
-├── js/
-│   ├── storage.js      # Gerenciamento do localStorage
-│   ├── calendar.js     # Renderizacao e navegacao do calendario
-│   ├── dialog.js       # Controle do dialog e formularios
-│   └── app.js          # Inicializacao e referencias DOM
-└── assets/
-    ├── PreLoader.png
-    ├── TelaDoSite.png
-    └── NovoEvento.png
-`
+├── index.html      # Página e pre-loader
+├── css/            # Estilos, variáveis e animações
+├── js/             # storage → calendar → dialog → app
+└── assets/         # Capturas de tela
+```
 
----
-
-## Tecnologias Utilizadas
-
-- **HTML5** - Estrutura semantica
-- **CSS3** - Variaveis CSS, Flexbox, Grid, animacoes e keyframes
-- **JavaScript (ES6+)** - Logica vanilla sem dependencias externas
-- **localStorage** - Persistencia de dados no navegador
-
----
-
-## Como Usar
-
-1. Abra o arquivo index.html em qualquer navegador moderno
-2. Aguarde o pre-loader finalizar
-3. Navegue entre os meses usando as setas ou o botao "Hoje"
-4. Clique em um dia ou no botao "+ Novo evento" para adicionar um evento
-5. Preencha os campos e clique em "Salvar"
-6. Os eventos sao salvos automaticamente e persistem entre sessoes
-
----
-
-## Navegacao por Teclado
-
-- **Seta Esquerda** - Ir para o mes anterior
-- **Seta Direita** - Ir para o proximo mes
-
----
-
-## Compatibilidade
-
-- Google Chrome 90+
-- Mozilla Firefox 88+
-- Microsoft Edge 90+
-- Safari 14+
+O JavaScript é dividido por responsabilidade: `storage.js` cuida do `localStorage`, `calendar.js` desenha o mês e trata a navegação, `dialog.js` controla o formulário e `app.js` inicializa tudo.
 
 ---
 
 <div align="center">
 
-**Equipe RAIDENS - SESI Aluminio 192**
+<img src="https://sesiraidens.github.io/portifolio/assets/logo_color-aNRVU26Y.png" alt="Logo RAIDENS" width="56">
+
+**Equipe RAIDENS** · SESI 192 Alumínio/SP
+
+[![Email](https://img.shields.io/badge/Email-sesiraidens%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:sesiraidens@gmail.com)
+[![Linktree](https://img.shields.io/badge/Linktree-sesiraidens-39E06B?style=flat-square&logo=linktree&logoColor=white)](https://linktr.ee/sesiraidens)
+[![GitHub](https://img.shields.io/badge/GitHub-sesiraidens-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/sesiraidens)
 
 </div>
