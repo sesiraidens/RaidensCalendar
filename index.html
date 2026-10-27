@@ -1,152 +1,92 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ffffff">
-<title>Raidens Calendar</title>
+<meta name="theme-color" content="#FAF8F7">
+<title>Raidens | Calendário | Equipe</title>
+<meta name="description" content="Calendário de eventos da equipe RAIDENS: competições, treinos e entregas em um só lugar.">
+
+<!-- Logo oficial OBRIGATÓRIO — baixado de https://sesiraidens.github.io/portifolio/assets/logo_color-aNRVU26Y.png -->
+<link rel="icon" type="image/png" href="assets/logo_color.png">
+
+<script>
+/* Tema antes do primeiro desenho, para não piscar */
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("theme"); } catch (e) {}
+  document.documentElement.setAttribute("data-theme", t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+})();
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/styles.css">
-
-<style>
-/* PRELOADER */
-.preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-
-  background: #fff;
-
-  opacity: 1;
-  visibility: visible;
-
-  transition:
-    opacity .45s ease,
-    visibility .45s ease;
-}
-
-.preloader.hide {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.preloader-logo {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-
-  animation: preloaderPulse 1.4s var(--spring) infinite;
-}
-
-@keyframes preloaderPulse {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 0 transparent);
-  }
-  50% {
-    transform: scale(1.08);
-    filter: drop-shadow(0 6px 18px rgba(217,51,59,.15));
-  }
-}
-
-.preloader-text {
-  margin: 0;
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  color: #aaa;
-}
-
-.preloader-bar-track {
-  width: 160px;
-  height: 3px;
-  background: #f0f0f0;
-  border-radius: 99px;
-  overflow: hidden;
-}
-
-.preloader-bar {
-  width: 40%;
-  height: 100%;
-  background: var(--red);
-  border-radius: 99px;
-
-  animation: preloaderShimmer 1.2s ease-in-out infinite;
-}
-
-@keyframes preloaderShimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(350%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .preloader-logo {
-    animation: none;
-  }
-  .preloader-bar {
-    animation: none;
-    width: 100%;
-  }
-}
-</style>
 </head>
 
 <body>
 
-<!-- PRELOADER -->
-<div class="preloader" id="preloader">
-  <img
-    class="preloader-logo"
-    src="https://raw.githubusercontent.com/sesiraidens/portifolio/refs/heads/gh-pages/assets/logo_color-aNRVU26Y.png"
-    alt="Raidens"
-  >
-  <p class="preloader-text">Raidens Calendar</p>
-  <div class="preloader-bar-track">
-    <div class="preloader-bar"></div>
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- TOPBAR -->
+<header class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="https://www.instagram.com/sesiraidens/" target="_blank" rel="noopener">
+      <img class="brand-logo" src="assets/logo_color.png" alt="Raidens" width="34" height="34">
+      <div class="brand-text">
+        <span class="brand-name">RAIDENS</span>
+        <span class="brand-sub">Calendário · Equipe</span>
+      </div>
+    </a>
+
+    <div class="topbar-right">
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Alternar tema"></button>
+    </div>
   </div>
-</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>
+      <span class="line"><span>Organize a</span></span>
+      <span class="line"><span><span class="accent-word">agenda</span> da</span></span>
+      <span class="line"><span>equipe.</span></span>
+    </h1>
+
+    <p class="lede reveal delay-1">Competições, treinos e entregas da RAIDENS em um calendário só. Toque em um dia para marcar um evento.</p>
+
+    <div class="hero-cta reveal delay-2">
+      <button class="btn-primary" id="newBtn" type="button">
+        Novo evento
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+      <a class="btn-ghost" href="#calendario">Ver calendário</a>
+    </div>
+  </div>
+
+  <!-- RESUMO: o cartão escuro de destaque da tela -->
+  <aside class="summary-card reveal delay-3" aria-live="polite">
+    <div class="sum-eyebrow">Próximo evento</div>
+    <div class="sum-next" id="sumNext">Nenhum evento marcado</div>
+    <div class="sum-desc" id="sumNextDate">Toque em um dia do calendário para criar o primeiro.</div>
+
+    <div class="sum-total"><span id="sumCount">0</span><span class="unit" id="sumUnit">eventos</span></div>
+    <div class="sum-desc" id="sumMonth">neste mês</div>
+
+    <div class="breakdown" id="sumList"></div>
+  </aside>
+</section>
+
+<div class="container"><div class="divider-line"></div></div>
+
+<div class="section-label" id="calendario"><span class="sl-num">01</span><h2>Calendário</h2></div>
 
 <!-- APP -->
-<main class="app">
-
-  <header>
-    <div class="brand">
-      <img
-        class="logo"
-        src="https://raw.githubusercontent.com/sesiraidens/portifolio/refs/heads/gh-pages/assets/logo_color-aNRVU26Y.png"
-        alt="Raidens"
-      >
-      <h1>Raidens Calendar</h1>
-    </div>
-
-    <button class="btn primary header-new" id="newBtn">
-      <svg viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2"
-           stroke-linecap="round">
-        <path d="M12 5v14M5 12h14"/>
-      </svg>
-      <span class="desktop">Novo evento</span>
-    </button>
-  </header>
-
-  <section class="calendar">
+<main class="layout">
+  <section class="section-card calendar reveal">
 
     <div class="toolbar">
       <div class="month-wrap">
@@ -154,22 +94,14 @@
       </div>
 
       <div class="nav">
-        <button class="btn" id="today">
-          <span>Hoje</span>
+        <button class="btn-control" id="today" type="button">Hoje</button>
+
+        <button class="icon-btn" id="prev" type="button" aria-label="Mês anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
 
-        <button class="icon-btn" id="prev" aria-label="Mês anterior">
-          <svg viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2">
-            <path d="m15 18-6-6 6-6"/>
-          </svg>
-        </button>
-
-        <button class="icon-btn" id="next" aria-label="Próximo mês">
-          <svg viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2">
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
+        <button class="icon-btn" id="next" type="button" aria-label="Próximo mês">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
     </div>
@@ -189,7 +121,13 @@
   </section>
 </main>
 
-<dialog id="dialog">
+<footer>
+  <div class="foot-logos"><img src="assets/logo_color.png" alt="Raidens"></div>
+  <p>Desenvolvido pela equipe <a href="https://www.instagram.com/sesiraidens/" target="_blank" rel="noopener"><strong>Raidens</strong></a> — 2026</p>
+  <p class="small">Os eventos ficam salvos só neste navegador.</p>
+</footer>
+
+<dialog id="dialog" aria-labelledby="dialogTitle">
 
   <div class="dialog-head">
     <div>
@@ -197,77 +135,50 @@
       <p id="prettyDate"></p>
     </div>
 
-    <button class="close" id="close" type="button">
-      <svg viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2">
-        <path d="M6 6l12 12M18 6 6 18"/>
-      </svg>
-    </button>
+    <button class="close" id="close" type="button" aria-label="Fechar">✕</button>
   </div>
 
   <form class="form" id="form">
 
     <div class="field">
       <label for="title">Evento</label>
-      <input
-        id="title"
-        type="text"
-        placeholder="Nome do evento"
-        autocomplete="off"
-        required
-      >
+      <input id="title" type="text" placeholder="Ex.: Etapa regional da OBR" autocomplete="off" required>
     </div>
 
-    <div class="field">
-      <label for="date">Data</label>
-      <input id="date" type="date" required>
-    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="date">Data</label>
+        <input id="date" type="date" required>
+      </div>
 
-    <div class="field">
-      <label for="time">Horário</label>
-      <input id="time" type="time">
+      <div class="field">
+        <label for="time">Horário</label>
+        <input id="time" type="time">
+      </div>
     </div>
 
     <div class="actions">
-      <button class="btn delete" id="deleteBtn"
-              type="button" hidden>
-        Excluir
-      </button>
-
-      <button class="btn" id="cancel" type="button">
-        Cancelar
-      </button>
-
-      <button class="btn primary" type="submit">
-        Salvar
-      </button>
+      <button class="btn-action delete" id="deleteBtn" type="button" hidden>Excluir</button>
+      <button class="btn-action" id="cancel" type="button">Cancelar</button>
+      <button class="btn-action primary" type="submit">Salvar evento</button>
     </div>
 
   </form>
 </dialog>
 
-<div class="saved" id="saved">Salvo</div>
+<div class="saved" id="saved" role="status">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
+  Salvo
+</div>
 
 <!-- SCRIPTS -->
+<script src="js/dom.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/calendar.js"></script>
+<script src="js/summary.js"></script>
 <script src="js/dialog.js"></script>
+<script src="js/theme.js"></script>
 <script src="js/app.js"></script>
-
-<script>
-/* PRELOADER - esconde quando tudo carregar */
-window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
-
-  setTimeout(() => {
-    preloader.classList.add("hide");
-
-    setTimeout(() => {
-      preloader.remove();
-    }, 500);
-  }, 800);
-});
-</script>
 
 </body>
 </html>

@@ -116,6 +116,8 @@ function render(direction = null) {
 
     days.appendChild(cell);
   }
+
+  renderSummary();
 }
 
 function changeMonth(amount) {
