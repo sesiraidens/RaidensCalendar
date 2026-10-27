@@ -79,3 +79,4 @@ function renderSummary() {
     sumList.appendChild(row);
   });
 }
+
